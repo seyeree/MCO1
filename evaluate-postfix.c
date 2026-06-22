@@ -4,12 +4,20 @@
 #include "queue.h"
 #include "evaluate-postfix.h"
 
+/**
+ * Solves a postfix expression stored in a queue.
+ * 
+ * @param postQueue          Pointer to the postfix queue
+ * @param divByZeroError     Pointer to a flag that turns into 1 if a division by zero is present
+ * @return                   The final answer to the calculated math expression
+ */
 int evaluatePostfix(Queue* postQueue, int* divByZeroError) {
     Stack evalStack;
     initStack(&evalStack);
     *divByZeroError = 0;
     int finalResult = 0;
     
+    // Processes all tokens in the queue until it's empty
     while (!isQueueEmpty(postQueue)) {
         Token t = dequeue(postQueue);
         
