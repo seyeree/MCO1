@@ -88,9 +88,19 @@ Queue infixToPostfix(char* infix) {
                 i++; 
             }
 
-            // Checks if an operator has higher or equal precedence, move it to he queue
-            while (!isStackEmpty(&opStack) && peek(&opStack) != '(' && 
-                   getPrecedence(peek(&opStack)) >= getPrecedence(opCode)) {
+            // Checks precedence and applies left/right associativity rules
+            while (!isStackEmpty(&opStack) && peek(&opStack) != '(') {
+                int topPrec = getPrecedence(peek(&opStack));
+                int currPrec = getPrecedence(opCode);
+                
+                // Exponentiation (^) and Logical NOT (!) are right-associative
+                if (opCode == '^' || opCode == '!') {
+                    if (topPrec <= currPrec) break; 
+                } else {
+                    // All other operators are left-associative
+                    if (topPrec < currPrec) break;  
+                }
+                
                 Token t;
                 t.type = 1;
                 t.value = pop(&opStack);

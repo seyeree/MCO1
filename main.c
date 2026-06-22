@@ -49,12 +49,8 @@ int main() {
     char input[256];
     int keepRunning = 1;
 
-    printf("+-- Infix Expression Evaluator --+\n");
-    printf("Type 'QUIT' to exit the program\n");
-    
     // Main loop
     while (keepRunning) {
-        printf("Enter an infix expression: ");
         fflush(stdout);
 
         if (scanf("%255s", input) != 1) {
@@ -96,9 +92,9 @@ int main() {
                 int result = evaluatePostfix(&evalQueue, &divError);
                 
                 if (divError == 1) {
-                    printf("Division by zero error!\n\n");
+                    printf("Division by zero error!\n");
                 } else {
-                    printf("%d\n\n", result);
+                    printf("%d\n", result);
                 }
             }
         }

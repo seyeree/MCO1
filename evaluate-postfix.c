@@ -36,7 +36,13 @@ int evaluatePostfix(Queue* postQueue, int* divByZeroError) {
                 if (t.value == '+') res = val1 + val2;
                 else if (t.value == '-') res = val1 - val2;
                 else if (t.value == '*') res = val1 * val2;
-                else if (t.value == '%') res = val1 % val2;
+                else if (t.value == '%') {
+    if (val2 == 0) {
+        *divByZeroError = 1;
+    } else {
+        res = val1 % val2;
+    }
+}
                 else if (t.value == '^') res = (int)pow(val1, val2);
                 else if (t.value == '>') res = val1 > val2;
                 else if (t.value == '<') res = val1 < val2;
